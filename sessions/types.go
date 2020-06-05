@@ -6,6 +6,11 @@ import (
 
 type Session map[string]bool
 
+func (s Session) IsSet(name string) bool {
+	value, _ := s[name]
+	return value
+}
+
 type SessionOptions struct {
 	Force  Session
 	Traits []string
