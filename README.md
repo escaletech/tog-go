@@ -4,6 +4,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/escaletech/tog-go?sort=semver)](https://github.com/escaletech/tog-go/releases)
 [![API reference](https://img.shields.io/badge/godoc-reference-5272B4)](https://pkg.go.dev/github.com/escaletech/tog-go?tab=overview)
 [![Go Report Card](https://goreportcard.com/badge/github.com/escaletech/tog-go)](https://goreportcard.com/report/github.com/escaletech/tog-go)
+[![Coveralls github branch](https://img.shields.io/coveralls/github/escaletech/tog-go/master)](https://coveralls.io/github/escaletech/tog-go)
 
 Go client library that implements the Tog specification for feature flags over Redis
 
