@@ -8,6 +8,11 @@ jobs:
     steps:
       - checkout
       - run: make test-ci
+      - run:
+          name: Upload coverage
+          command: |
+            go get github.com/mattn/goveralls
+            goveralls -coverprofile=coverage.out -service=circle-ci -repotoken $COVERALLS_TOKEN
 
 workflows:
   version: 2
