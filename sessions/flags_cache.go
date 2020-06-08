@@ -34,7 +34,9 @@ func newCachingFlagLister(ctx context.Context, opt flags.ClientOptions) (*cachin
 		cache:      cache,
 	}
 
-	lister.init(ctx)
+	if err := lister.init(ctx); err != nil {
+		return nil, err
+	}
 
 	return lister, nil
 }
@@ -45,13 +47,13 @@ type cachingFlagLister struct {
 	cache      *lru.Cache
 }
 
-func (c *cachingFlagLister) init(ctx context.Context) {
+func (c *cachingFlagLister) init(ctx context.Context) error {
 	pubsub := c.subscriber.Subscribe(ctx, keys.PubSub)
 
 	// Wait for confirmation that subscription is created before publishing anything.
 	_, err := pubsub.Receive(ctx)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	ch := pubsub.Channel()
@@ -60,6 +62,8 @@ func (c *cachingFlagLister) init(ctx context.Context) {
 			c.cache.Remove(m.Payload)
 		}
 	}()
+
+	return nil
 }
 
 func (c *cachingFlagLister) ListFlags(ctx context.Context, ns string) ([]flags.Flag, error) {
