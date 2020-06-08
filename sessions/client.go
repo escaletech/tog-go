@@ -9,6 +9,7 @@ import (
 	"github.com/escaletech/tog-go/flags"
 )
 
+// NewClient creates a new session client
 func NewClient(ctx context.Context, opt ClientOptions) (*Client, error) {
 	flagsClient, err := newCachingFlagLister(ctx, flags.ClientOptions{
 		Addr:    opt.Addr,
